@@ -67,7 +67,6 @@ export const apodSlice = createSlice({
 })
 
 export let FETCH_DATA = createAsyncThunk('API/FETCH_DATA',async (_targetDate: string) => {
-    
     const API_KEY = 'Iz75e0naUV7pTGptfpd3QCZZa9DKFdaR8P3JNPgc'
 
     return axios({
@@ -78,7 +77,7 @@ export let FETCH_DATA = createAsyncThunk('API/FETCH_DATA',async (_targetDate: st
         return res.data;
     })
     .catch(() => {
-        alert('데이터 조회에 실패하였습니다.');
+        console.log('데이터 조회에 실패하였습니다.');
     })
 
 })
