@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());	// json 등록
 app.use(bodyParser.urlencoded({ extended : false }));
 
-const port = 3000;
+const port = 3500;
 
 const { Client } = require('pg');
 
