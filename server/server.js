@@ -13,19 +13,21 @@ const port = 3500;
 
 const { Client } = require('pg');
 
+const { DB_INFO, APOD_API_KEY, P_CLIENT_ID, P_CLIENT_SECRET } = require('./info');
+
 const client = new Client({
-    user : 'msyslove',
-    host : 'localhost',
-    database : 'local_nasa',
-    password : '1105',
-    port : 5432,
+    user : DB_INFO.user,
+    host : DB_INFO.host,
+    database : DB_INFO.database,
+    password : DB_INFO.password,
+    port : DB_INFO.port,
 });
 
 client.connect();
 
 async function getApod(_from, _to){
 	
-    const API_KEY = 'Iz75e0naUV7pTGptfpd3QCZZa9DKFdaR8P3JNPgc'
+    const API_KEY = APOD_API_KEY;
     
     try{
     	const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${_from}&end_date=${_to}`).then(res => res.data);
@@ -40,8 +42,8 @@ async function translate(_originText) {;
    
     // const CLIENT_ID = 'vCMt9kip4TSxL5JUEM0h';
     // const CLIENT_SECRET = 'QIotQo3QgJ';
-    const CLIENT_ID = 'MI0E72S4jFKpD2s1Lq74';
-    const CLIENT_SECRET = 'Vmbqw9iKDD';
+    const CLIENT_ID = P_CLIENT_ID;
+    const CLIENT_SECRET = P_CLIENT_SECRET;
     let originText = _originText;
    
     let API_URL = 'https://openapi.naver.com/v1/papago/n2mt';
@@ -163,20 +165,6 @@ app.get("/:targetDate", asyncHandler(async (req, res, next) => {
 
 
 }))
-
-
-
-
-// 
-
-
-
-// 
-
-
-
-
-
 
 // port middleware
 app.listen(port, () => {
