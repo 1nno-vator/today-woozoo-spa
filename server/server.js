@@ -118,16 +118,14 @@ app.get("/:targetDate", asyncHandler(async (req, res, next) => {
     const targetDate = req.params.targetDate;
     const values = [targetDate];
 
-    let convertObj = {}
-    
     client.query(sql, values, async(err, result) => {
+        
         if (err) {
-            // console.log(err.stack)
+            res.send('err');
         } else {
-            convertObj = { ...result.rows[0] };
-
+            let convertObj = { ...result.rows[0] };
+            
             if (convertObj.date) {
-
 
                 if (convertObj.translate_explanation) {
                     // console.log('번역있음')
@@ -136,29 +134,36 @@ app.get("/:targetDate", asyncHandler(async (req, res, next) => {
                     convertObj.translate_title  = await translate(convertObj.title);
                     insertData(convertObj);
                 }
-
                 res.json(convertObj);
 
             } else {
-                convertObj = await getApod(targetDate, targetDate);
-
-                if (convertObj === "ERROR") {
-                    res.status(400).json({
-                        status: 'error'
+                await getApod(targetDate, targetDate)
+                    .then((resData) => {
+                        const result = { ...resData[0]}
+                        return result;
+                    })
+                    .then(async(data) => {
+                        
+                        if (data === "ERROR") {
+                            res.status(400).json({
+                                status: 'error'
+                            });
+                        } else {
+                            data.translate_explanation = await translate(data.explanation);
+                            data.translate_title = await translate(data.title);
+                            insertData(data);
+                            res.json(data);
+                        }
+                        
                     });
-                } else {
-                    convertObj.translate_explanation = await translate(convertObj.explanation);
-                    convertObj.translate_title = await translate(convertObj.title);
-                    insertData(convertObj);
-                    res.json(convertObj);
-                }
                 
             }
 
             
 
         }
-
+        
+        
     });
 
     
