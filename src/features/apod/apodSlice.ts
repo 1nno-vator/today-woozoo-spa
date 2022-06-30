@@ -86,7 +86,7 @@ export const apodSlice = createSlice({
 })
 
 export let FETCH_DATA = createAsyncThunk('API/FETCH_DATA',async (_targetDate: string) => {
-    console.log(`http://localhost:3500/${_targetDate}`);
+    // console.log(`http://localhost:3500/${_targetDate}`);
     return axios({
         method: "get",
         url: `http://luvlog.xyz:3500/${_targetDate}`
