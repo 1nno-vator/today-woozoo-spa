@@ -18,6 +18,7 @@ const FullScreenDiv = styled.div`
 
 function Modal() {
     
+    const data = useAppSelector((state) => state.apodReducer.data);
     const isLoad = useAppSelector((state) => state.apodReducer.isLoad);
     const options = {
         animationData: animationData,
@@ -26,7 +27,7 @@ function Modal() {
     };
     
     return (
-        <FullScreenDiv style={{ display: isLoad ? 'none' : 'block' }}>
+        <FullScreenDiv style={{ display: data.title && isLoad ? 'none' : 'block' }}>
             <Lottie options={options}/>
         </FullScreenDiv>
     )

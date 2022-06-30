@@ -18,8 +18,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "declaration": true, // lib 만들 때 .d.ts 파일을 자동으로
+    "declarationDir": "./types", // 이 폴더에 만들어주는 옵션
+    "typeRoots": ["./types", "./node_modules/@types"],
   },
+  "typeRoots": ["./types", "./node_modules/@types"],
   "include": [
     "src"
   ]

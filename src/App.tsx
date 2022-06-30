@@ -82,7 +82,7 @@ function App() {
   }, [dispatch, targetDate])
 
   const dateHandler = (flag: string) => {
-    
+
     if (flag === 'ADD') {
       dispatch(ADD_DAY());
     } else {

@@ -3,11 +3,13 @@ const bodyParser = require('body-parser');
 const express = require("express");
 const asyncHandler = require('express-async-handler');
 const qs = require('querystring');
+const cors = require('cors');
 
 const app = express();
 
 app.use(bodyParser.json());	// json 등록
 app.use(bodyParser.urlencoded({ extended : false }));
+app.use(cors());
 
 const port = 3500;
 
@@ -62,9 +64,21 @@ async function translate(_originText) {;
         },
     };
 
-    const response = await axios.post(API_URL, params, config);
+    const response = await axios.post(API_URL, params, config)
+    .then((res) => {
+        return res.data.message.result.translatedText;
+    })
+    .catch((e) => {
+        return 'TRANSLATE MODULE ERROR';
+    })
+
+    if (response === 'TRANSLATE MODULE ERROR') {
+        return null;
+    } else {
+        return response;
+    }
     
-    return response.data.message.result.translatedText;
+    
  };
 
 function insertData(_result) {
@@ -145,13 +159,20 @@ app.get("/:targetDate", asyncHandler(async (req, res, next) => {
                     .then(async(data) => {
                         
                         if (data === "ERROR") {
+                            
                             res.status(400).json({
                                 status: 'error'
                             });
+
                         } else {
+                            
                             data.translate_explanation = await translate(data.explanation);
                             data.translate_title = await translate(data.title);
-                            insertData(data);
+                            
+                            if (data.translate_explanation !== null && data.translate_title !== null) {
+                                insertData(data);
+                            } 
+
                             res.json(data);
                         }
                         
