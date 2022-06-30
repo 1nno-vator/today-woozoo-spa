@@ -89,7 +89,7 @@ export let FETCH_DATA = createAsyncThunk('API/FETCH_DATA',async (_targetDate: st
     console.log(`http://localhost:3500/${_targetDate}`);
     return axios({
         method: "get",
-        url: `http://localhost:3500/${_targetDate}`
+        url: `http://luvlog.xyz:3500/${_targetDate}`
     })
     .then(res => {
         return res.data
