@@ -127,7 +127,7 @@ app.post("/insertData", asyncHandler(async (req, res, next) => {
     res.end();
 }));
 
-app.get("/:targetDate", asyncHandler(async (req, res, next) => {
+app.get("/woozooserver/:targetDate", asyncHandler(async (req, res, next) => {
     let sql = "SELECT * FROM NASA_API_APOD WHERE DATE = $1";
     const targetDate = req.params.targetDate;
     const values = [targetDate];
