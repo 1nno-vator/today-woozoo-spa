@@ -25,7 +25,7 @@ function Modal() {
         loop: true,
         autoplay: true,
     };
-    
+    // Modal
     return (
         <FullScreenDiv style={{ display: data.title && isLoad ? 'none' : 'block' }}>
             <Lottie options={options}/>
