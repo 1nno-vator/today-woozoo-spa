@@ -2,7 +2,7 @@ import axios from 'axios';
 import moment from 'moment';
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface DataProps {
+type DataProps = {
     targetDate: string,
     isLoad: boolean,
     data: {
