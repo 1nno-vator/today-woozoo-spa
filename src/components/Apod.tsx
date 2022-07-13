@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { LOAD_STATUS_TOGGLE } from '../features/apod/apodSlice';
 import Switch from "react-switch";
+import WarningBoxBackground from '../data/space-backgrounds.jpg';
 
 const fadeInAnimation = keyframes`
     0% {
@@ -86,12 +87,12 @@ const ExplanationBox = styled.div`
 
 const WarningBox = styled.div`
     position: fixed;
-    background: rgba(128, 128, 128, 0.9);
     width: 100vw;
     height: 100vh;
     top: 0;
     left: 0;
     z-index: 99999;
+    background: rgba(255, 248, 231, 0.9);
     display: none;
 
     div {
@@ -99,11 +100,27 @@ const WarningBox = styled.div`
         justify-content: center;
         align-items: center;
         height: 100%;
+        color: black;
         font-weight: bold;
         font-size: 1.5em;
 
         @media screen and (max-width: 480px) {
             font-size: 1em;
+        }
+    }
+
+    p {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin-bottom: 20%;
+        color: grey;
+        font-size: 14px;
+        text-align: center;
+
+        @media screen and (max-width: 480px) {
+            font-size: 10px;
         }
     }
 
@@ -149,6 +166,7 @@ function Apod() {
         <Container>
             <WarningBox>
                 <div>원활한 사용을 위해 PC로 접속해주세요!</div>
+                <p>지금 보시는 이 색은 우주의 평균 색이라고 알려진 "코스믹 라테" 입니다</p>
             </WarningBox>
 
             <SubContainer>
