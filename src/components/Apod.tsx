@@ -4,7 +4,6 @@ import styled, { keyframes } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../app/store';
 import { LOAD_STATUS_TOGGLE } from '../features/apod/apodSlice';
 import Switch from "react-switch";
-import WarningBoxBackground from '../data/space-backgrounds.jpg';
 
 const fadeInAnimation = keyframes`
     0% {
@@ -180,10 +179,10 @@ function Apod() {
                 >
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                         <h2>{data.translate_title && translateMode ? data.translate_title : data.title} {`(${targetDate})`}</h2>
-                        <p style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
                             <span style={{ marginRight: '10px' }}>번역보기</span>
                             <Switch onChange={() => translateModeToggle()} checked={translateMode} />
-                        </p>
+                        </div>
                     </div>
                     <h4>{data.copyright}</h4>
                     <p>{data.translate_explanation && translateMode ? data.translate_explanation : data.explanation}</p>

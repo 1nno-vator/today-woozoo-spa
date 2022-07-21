@@ -33,7 +33,7 @@ let initialState:DataProps = {
         media_type: null,
         service_version: null,
         title: null,
-        url: "https://cdn.newspenguin.com/news/photo/202009/3119_9104_2736.jpg",
+        url: "https://luvlog-bucket.s3.ap-northeast-2.amazonaws.com/static/n_bg.png",
         translate_title: null,
         translate_explanation: null
     },

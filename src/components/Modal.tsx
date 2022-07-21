@@ -17,7 +17,6 @@ const FullScreenDiv = styled.div`
 `
 
 function Modal() {
-    
     const data = useAppSelector((state) => state.apodReducer.data);
     const isLoad = useAppSelector((state) => state.apodReducer.isLoad);
     const options = {
@@ -25,6 +24,7 @@ function Modal() {
         loop: true,
         autoplay: true,
     };
+
     // Modal
     return (
         <FullScreenDiv style={{ display: data.title && isLoad ? 'none' : 'block' }}>
